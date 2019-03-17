@@ -25,6 +25,10 @@ function isALinkTo (path, element) {
   if (arguments.length === 1) {
     return (element) => isALinkTo(path, element)
   }
+
+  if (window.$docsify && window.$docsify.routerMode === 'history') {
+    return decodeURIComponent(element.getAttribute('href')) === decodeURIComponent(`${path}`)
+  }
   return decodeURIComponent(element.getAttribute('href').split('?')[0]) === decodeURIComponent(`#${path}`)
 }
 
